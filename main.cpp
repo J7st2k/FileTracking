@@ -1,8 +1,18 @@
-#include <QCoreApplication>
+#include "Tracker.h"
+#include <QTextStream>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
+    QCoreApplication app(argc, argv);
+    // QTextStream cout(stdout);
+    // QTextStream cin(stdout);
+    // QString str;
+    // cout << "Enter file name:" << endl;
+    // str = cin.readLine();
+    // cout << "file name:" << str << endl;
 
-    return a.exec();
+    QString str = "text.txt";
+    Tracker A(str);
+    return 0;
+    //return app.exec();
 }
