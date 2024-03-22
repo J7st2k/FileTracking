@@ -16,12 +16,20 @@ Tracker::Tracker(QString str, QObject *parent):QObject(parent)
 
     QObject::connect(qfsw, &QFileSystemWatcher::fileChanged, this, &Tracker::isChanged);
 
-    cout << "Tracker created" << Qt::endl;
+    logger->log("Tracker created");
+}
+
+void Tracker::setUrl(const QString &str)
+{
+    delete qf;
+    qf = new QFile(str);
+    qfsw->removePath(url);
+    qfsw->addPath(str);
+    url = str;
 }
 
 void Tracker::isChanged()
 {
-    if (qf->exists()) cout << "File" << url << "changed.";
-    else cout << "File" << url << "deleted";
+    logger->signalLog(url, qf->exists(), qf->size());
 }
 
